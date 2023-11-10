@@ -1,4 +1,4 @@
-import linkedInLogo2 from './img/LinkedInLogo2.png'
+import linkedInLogo2 from '../img/LinkedInLogo2.png'
 
 export let Footer = () => {
   return (
