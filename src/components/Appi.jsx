@@ -1,4 +1,6 @@
 import { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
+
 
 export const Appi = () => { 
 
@@ -18,20 +20,24 @@ export const Appi = () => {
         },[])
         
   }
-  console.log(data)
+  console.log('data -' + data)
 
 
         return(
             <div className="container d-flex flex-wrap ">
 
                 {data.map((pelicula) => (
-                    <div className="card col-2 m-2">
-                            <div className = "pelicula card-body" key={pelicula.id}>
-                                <img className = "poster card-img"  src={`https://image.tmdb.org/t/p/w500/${pelicula.poster_path}`} alt={pelicula.title}/> 
-                                <h5 className = "titulo card-title" >{pelicula.title} </h5>
-                                </div>
-                            </div> ))
-                            }
+                 
+                      <div className="card col-2 m-2">
+                          <Link key={pelicula.id} to={`detailMovie/${pelicula.id}`}>
+                              <div className = "pelicula card-body" key={pelicula.id}>
+                                  <img className = "poster card-img"  src={`https://image.tmdb.org/t/p/w500/${pelicula.poster_path}`} alt={pelicula.title}/> 
+                                  <h5 className = "titulo card-title" >{pelicula.title} </h5>
+                                  </div>
+                          </Link>
+                      </div>
+                  
+                ))}       
             </div>
         );
                     
