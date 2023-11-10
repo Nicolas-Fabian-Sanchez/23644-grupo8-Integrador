@@ -10,7 +10,9 @@ function App() {
       <Routes>
           <Route path="/" element={<Appi />} />
           <Route path="detailMovie/:idmovie" element={<DetailMovie />} />
-        </Routes>
+          <Route path="favoritos" element={<Favorito ids={[536437, 568124]} />}/>
+      </Routes>
+      <a href='/favoritos' className='btn btn-primary'>Favoritos</a>
     </div>
   );
 }
