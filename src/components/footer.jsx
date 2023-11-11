@@ -28,15 +28,13 @@ export let Footer = () => {
         <p className="m-0">Documentación</p>
       </button>
       <button
-        type="button"
-        className="btn btn-primary w-25 p-0"
+        type=""
+        className=" w-25 p-0 bg-primary border-0 "
         data-bs-toggle="modal"
         data-bs-target="#LinedIn"
       >
         <img src={linkedInLogo2} alt="LinkedIn" srcset="" className=' w-75 w-md-100'/>
       </button>
-
-      
       <div
         className="modal fade"
         id="Sobre-nosotros"
@@ -144,7 +142,7 @@ export let Footer = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body ps-5 ">
+            <div className="modal-body px-auto d-flex flex-column ">
               <a
                 href="http://www.linkedin.com/in/jonathan-galimberti-developer"
                 target="_blank"
@@ -152,6 +150,54 @@ export let Footer = () => {
                 className="link-underline link-underline-opacity-0 link-dark fw-bold ms-4"
               >
                 Jonathan Galimberti
+              </a>
+              <a
+                href="https://www.linkedin.com/in/franco-benitez-579268259/"
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline link-underline-opacity-0 link-dark fw-bold ms-4"
+              >
+                Franco Benitez
+              </a>
+              <a
+                href="https://www.linkedin.com/in/miltonmurguia/"
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline link-underline-opacity-0 link-dark fw-bold ms-4"
+              >
+                Milton Murguia
+              </a>
+              <a
+                href="https://www.linkedin.com/in/nicolas-s%C3%A1nchez-894b00257/"
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline link-underline-opacity-0 link-dark fw-bold ms-4"
+              >
+                Nicolas Sanchez
+              </a>
+              <a
+                href="https://www.linkedin.com/in/arriagadamaximiliano/"
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline link-underline-opacity-0 link-dark fw-bold ms-4"
+              >
+                Maximiliano Arriagada
+              </a>
+              <a
+                href="https://ar.linkedin.com/in/maria-belen-rodriguez7"
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline link-underline-opacity-0 link-dark fw-bold ms-4"
+              >
+                Maria Belen Rodriguez
+              </a>
+              <a
+                href=""
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline link-underline-opacity-0 link-dark fw-bold ms-4"
+              >
+                Ivana Aubert
               </a>
             </div>
           </div>
