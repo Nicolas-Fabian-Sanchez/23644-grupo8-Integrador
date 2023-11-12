@@ -82,24 +82,25 @@ export const Favorito = ({ ids }) => {
   };
 
   return (
-    <div>
-      <h2>FAVORITOS</h2>
+    <div className='my-5'>
+      <h2 className='text-start mx-5 mb-4'>Favoritos</h2>
       {pelicula.map((pelicula) => (
-        <div className="card mb-3 cardFavorito rounded" key={pelicula.id}>
+        <div className="card mb-3 mx-5 rounded" key={pelicula.id}>
           <div className="row g-0">
             <div className="col-md-2">
               <img id={`poster-${pelicula.id}`} src={`https://image.tmdb.org/t/p/w200${pelicula.poster_path}`} className="img-fluid rounded-start m-1" alt="..." />
             </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title">{pelicula.title}</h5>
-                <p className="card-text">{pelicula.overview}</p>
-                <img src={Corazon} alt="Corazon de Favoritos" onClick={() => handleEliminarPelicula(pelicula.id)} />
+            <div className="col-md-10 d-flex flex-column 
+            ">
+              <div className="card-body d-flex flex-column  pb-3 align-items-start">
+                <h5 className="card-title fw-bold mb-3">{pelicula.title}</h5>
+                <p className="card-text text-start ">{pelicula.overview}</p>
               </div>
-            </div>
-            <div className='col-md-2'>
-              <button className='btn btn-primary mt-3 m-2' onClick={() => getDetailMovie(pelicula.id)}>Ver Trailer</button>
-              <button className='btn btn-primary mt-3 m-2' onClick={() => handleDescargarPoster(pelicula.id)}>Descargar Poster</button>
+              <div className='d-flex mt-3 g-3 '>
+                <img src={Corazon} alt="Corazon de Favoritos" className='mx-2' onClick={() => handleEliminarPelicula(pelicula.id)} />
+                <button className='btn btn-primary my-3 mx-2' onClick={() => getDetailMovie(pelicula.id)}>Ver Trailer</button>
+                <button className='btn btn-primary my-3 mx-2' onClick={() => handleDescargarPoster(pelicula.id)}>Descargar Poster</button>
+              </div>
             </div>
           </div>
         </div>
@@ -111,17 +112,20 @@ export const Favorito = ({ ids }) => {
   contentLabel="Trailer Modal"
   style={{
     content: {
-      width: '80%', // Ajusta el ancho según tus necesidades (porcentaje)
-      height: '80%', // Ajusta la altura según tus necesidades (porcentaje)
+      width: '90vw', // Ajusta el ancho según tus necesidades (porcentaje)
+      height: '90vh', // Ajusta la altura según tus necesidades (porcentaje)
       margin: 'auto', // Centra el modal en la pantalla
       position: 'relative', // Permite posicionar elementos hijos de manera absoluta
+      padding:"0px",
+      border:"none", 
+      overflow:"hidden"
     },
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.7)', // Fondo oscuro alrededor del modal
     },
   }}
 >
-  <button className="cerrar-btn" onClick={closeModal}>X</button>
+  <button className=" position-absolute top-0 end-0 btn btn-light rounded-circle fs-1 m-2 fw-bold text-black px-3 shadow-lg  bg-body-tertiary rounded" onClick={closeModal}>X</button>
   <iframe
     title="Trailer"
     width="100%"

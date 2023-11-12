@@ -1,4 +1,12 @@
 import linkedInLogo2 from '../img/LinkedInLogo2.png'
+import jsLogo from  "../img/JsLogo2.png"
+import htmLogo from  "../img/htmlLogo2.png"
+import cssLogo from  "../img/CssLogo.png"
+import reactLogo from  "../img/reactLogo.png"
+import firebaseLogo from  "../img/firebase.png"
+import apiLogo from  "../img/API.png"
+import boostrapLogo from  "../img/BootstrapLogo.png"
+import html2canvasLogo from  "../img/html2canvas.png"
 
 export let Footer = () => {
   return (
@@ -112,7 +120,30 @@ export let Footer = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">ejemplo</div>
+            <div className="modal-body container  ">
+              <div className='row justify-content-center mb-4 '>
+                <img src={jsLogo} alt="" className=' img-fluid col-3 border-0 '/>
+                <img src={cssLogo} alt="" className=' img-fluid col-3 border-0 h-100'/>
+                <img src={htmLogo} alt="" className=' img-fluid col-3 border-0 h-100'/>
+              </div>
+              <div className='row justify-content-center  mb-4'>
+                <img src={boostrapLogo} alt="" className=' img-thumbnail col-3 border-0'/>
+                <img src={reactLogo} alt="" className=' img-thumbnail  col-3 border-0'/>
+                <div className='col-3 bg-success px-1 border-0 '>
+                  <img src={html2canvasLogo} alt="" className='img-fluid w-75 '/>
+                  <p className='m-0 text-white '>Html2canvas</p>
+              </div>
+                </div>
+                  <div className='row justify-content-center mb-4'>
+                    <img src={firebaseLogo} alt="" className='col-10' /> 
+                </div>
+              <div className='row flex-column '>
+                <div className='d-flex align-items-center justify-content-around '>
+                  <img src={apiLogo} alt="" className='img-fluid col-3' />
+                  <p className='col-7 fw-bold fs-5'>TSMD (https://api.themoviedb.org/)</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
