@@ -1,7 +1,7 @@
 import logo from "../img/Logo2.png";
 
 export const Header = () => {
-  let logIn = true;
+  let logIn = false;
 
   if (logIn) {
     return (
@@ -96,10 +96,10 @@ export const Header = () => {
                   Aceptar
                 </button>
                 <div>
-                  <a href="/" className=" text-white p-2 ">
+                  <a href="./Registrarse" className=" text-white p-2 ">
                     Registrarse
                   </a>
-                  <a href="/" className=" text-white p-2 ">
+                  <a href="./RecuperoCon" className=" text-white p-2 ">
                     ¿Olvidaste tu contraseña?
                   </a>
                 </div>

@@ -5,6 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import { Favorito } from './components/Favorito';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
+import { Registrarse } from './components/Registrarse';
+import { RecuperoCon } from './components/RecuperoCon';
+
 
 function App() {
   return (
@@ -14,6 +17,8 @@ function App() {
         <Route path="/" element={<Appi />} />
         <Route path="detailMovie/:idmovie" element={<DetailMovie />} />
         <Route path="favoritos" element={<Favorito ids={[536437, 568124]} />} />
+        <Route path='Registrarse' element={<Registrarse/>}/>
+        <Route path='RecuperoCon' element={<RecuperoCon/>}/>
       </Routes>
       <Footer />
     </div>
