@@ -1,52 +1,135 @@
 import logo from "../img/Logo2.png";
 
 export const Header = () => {
-  let logIn = false;
+  let logIn = true;
 
   if (logIn) {
     return (
-      <div className="container-fluid bg-primary d-flex justify-content-around py-2 align-items-center ">
-        <a className="col-2  " href="/">
-          <img src={logo} alt="Youmovie" className="img-fluid " />
-        </a>
-        <a className=" btn btn-primary fs-3  " href="/">
-          Películas{" "}
-        </a>
-        <a className=" btn btn-primary fs-3" href="/">
-          Series{" "}
-        </a>
 
-        <a href="/favoritos" className="btn btn-primary fs-3">
-          Favoritos
-        </a>
+      // botones navbar
+      <nav
+        className="navbar navbar-expand-lg bg-primary text-light "
+        data-bs-theme="light"
+      >
+        <div className="container-fluid ">
+          <a className="col-6 col-lg-3 m-lg-3  " href="/">
+            <img src={logo} alt="Youmovie" className="w-50" />
+          </a>
+          <button
+            class="navbar-toggler col-lg-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            className="collapse navbar-collapse justify-content-between col-lg-5 mx-2"
+            id="navbarSupportedContent"
+          >
+            <ul className="navbar-nav  mb-2 mb-lg-0 d-flex justify-content-evenly  h-100 w-75 ">
+              <li className="nav-item ">
+                <button
+                  className=" btn btn-primary fs-2"
+                  data-bs-target="/"
+                  data-bs-toggle="modal"
+                  type="button"
+                >
+                  Películas{" "}
+                </button>
+              </li>
+              <li className="nav-item">
+                <button
+                  className=" btn btn-primary fs-2"
+                  data-bs-target="/"
+                  data-bs-toggle="modal"
+                  type="button"
+                >
+                  Series{" "}
+                </button>
+              </li>
+              <li>
+                <a href="/favoritos" className="btn btn-primary fs-2">
+                  Favoritos{" "}
+                </a>
+              </li>
+            </ul>
+            <button
+              type="button"
+              className="btn btn-success mx-2 fs-2 "
+              data-bs-toggle="modal"
+              data-bs-target=""
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </nav>
 
-        <a className="btn btn-success " href="/">
-          Log out
-        </a>
-      </div>
     );
   } else {
     return (
-      <div className="container-fluid bg-primary d-flex justify-content-around py-2 align-items-center ">
-        <a className="col-2 btn btn-primary " href="/">
-          <img src={logo} alt="Youmovie" className="w-50" />
-        </a>
-        <a className=" btn btn-primary fs-3  " href="/">
-          Películas{" "}
-        </a>
-        <a className=" btn btn-primary fs-3" href="/">
-          Series{" "}
-        </a>
+      // botones navbar
+      <nav
+        className="navbar navbar-expand-lg bg-primary text-light "
+        data-bs-theme="light"
+      >
+        <div className="container-fluid ">
+          <a className="col-6 col-lg-3 m-lg-3  " href="/">
+            <img src={logo} alt="Youmovie" className="w-50" />
+          </a>
+          <button
+            class="navbar-toggler col-lg-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            className="collapse navbar-collapse justify-content-between col-lg-5 mx-2"
+            id="navbarSupportedContent"
+          >
+            <ul className="navbar-nav  mb-2 mb-lg-0 d-flex justify-content-evenly  h-100 w-75 ">
+              <li className="nav-item ">
+                <button
+                  className=" btn btn-primary fs-2"
+                  data-bs-target="#LogIn"
+                  data-bs-toggle="modal"
+                  type="button"
+                >
+                  Películas{" "}
+                </button>
+              </li>
+              <li className="nav-item">
+                <button
+                  className=" btn btn-primary fs-2"
+                  data-bs-target="#LogIn"
+                  data-bs-toggle="modal"
+                  type="button"
+                >
+                  Series{" "}
+                </button>
+              </li>
+            </ul>
+            <button
+              type="button"
+              className="btn btn-success mx-2 fs-2 "
+              data-bs-toggle="modal"
+              data-bs-target="#LogIn"
+            >
+              Log In
+            </button>
+          </div>
+        </div>
 
-        <button
-          type="button"
-          className="btn btn-success"
-          data-bs-toggle="modal"
-          data-bs-target="#LogIn"
-        >
-          Log In
-        </button>
-
+        {/* modales */}
         <div
           className="modal fade"
           id="LogIn"
@@ -107,7 +190,7 @@ export const Header = () => {
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     );
   }
 };
