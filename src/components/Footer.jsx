@@ -44,14 +44,14 @@ export let Footer = () => {
         <img
           src={linkedInLogo2}
           alt="LinkedIn"
-          srcset=""
+          srcSet=""
           className=" img-fluid"
         />
       </button>
       <div
         className="modal fade"
         id="Sobre-nosotros"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -85,7 +85,7 @@ export let Footer = () => {
       <div
         className="modal fade"
         id="Documentacion"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -112,7 +112,7 @@ export let Footer = () => {
       <div
         className="modal fade"
         id="Tecnologias-utilizadas"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -188,7 +188,7 @@ export let Footer = () => {
       <div
         className="modal fade"
         id="LinedIn"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >

@@ -1,9 +1,65 @@
 import logo from "../img/Logo2.png";
+import React, { useState, useEffect } from "react";
+import { FirebaseAuthService } from "../services/firebaseAuthService";
+import Swal from 'sweetalert2';
 
 export const Header = () => {
   let logIn = false;
+  let { getAuthUser, signIn, handleSignInWithGoogle, signOut } = FirebaseAuthService();
+  let [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+  
+  const getUserFB = async () => {
+    user = await getAuthUser();
+    setUser(user);
+  }
 
-  if (logIn) {
+  useEffect(() => {
+    getUserFB();
+  }, [])
+
+  const handleSignIn = async () => {
+    try {
+      let email = document.getElementById('email').value;
+      let password = document.getElementById('password').value;
+      const userCredential = await signIn(email, password);
+      const signedInUser = userCredential.user;
+      console.log('Usuario autenticado con éxito:', signedInUser);
+      setError(null);
+      user = signedInUser; //ver
+      setUser(user);
+      
+    } catch (error) {
+      setError(error.message);
+      console.error('Error al iniciar sesión:', error.message);
+    }
+  };
+
+  const handleSignInGoogle = async () => {
+    try {
+      const result = await handleSignInWithGoogle();
+      const user = result;
+      setUser(user);
+      console.log('Usuario autenticado con Google');
+      Swal.fire('', `Bienvenido, ${user.email}!`, 'success');
+    } catch (error) {
+      console.error('Error al autenticar con Google:', error.message);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      const res = await signOut();
+      console.log('Usuario cerró sesión');
+      if (res) {
+        setUser(null);
+      }
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error.message);
+    }
+  };
+
+  if (user) {
     return (
 
       // botones navbar
@@ -60,9 +116,7 @@ export const Header = () => {
             <button
               type="button"
               className="btn btn-success mx-2 fs-5 "
-              data-bs-toggle="modal"
-              data-bs-target=""
-              href="/"
+              onClick={handleSignOut}
             >
               Log out
             </button>
@@ -134,7 +188,7 @@ export const Header = () => {
         <div
           className="modal fade"
           id="LogIn"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -150,7 +204,7 @@ export const Header = () => {
               </div>
               <div className="modal-body border-0 w-75 mx-auto">
                 <div className="mb-3">
-                  <label for="email" className="form-label fs-3">
+                  <label htmlFor="email" className="form-label fs-3">
                     Email
                   </label>
                   <input
@@ -161,12 +215,12 @@ export const Header = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="Contraseña" className="form-label fs-3">
+                  <label htmlFor="password" className="form-label fs-3">
                     Contraseña
                   </label>
                   <input
                     className="form-control"
-                    id="Contraseña"
+                    id="password"
                     type="password"
                   ></input>
                 </div>
@@ -176,13 +230,16 @@ export const Header = () => {
                   type="button"
                   className="btn btn-success mx-auto mb-2 px-5"
                   data-bs-dismiss="modal"
+                  onClick={handleSignIn}
                 >
-                 
                   Aceptar
                 </button>
                 <div>
                   <a href="./Registrarse" className=" text-white p-2 ">
                     Registrarse
+                  </a>
+                  <a className=" text-white p-2 " onClick={handleSignInGoogle} data-bs-dismiss="modal">
+                    Inciar con Google
                   </a>
                   <a href="./RecuperoCon" className=" text-white p-2 ">
                     ¿Olvidaste tu contraseña?

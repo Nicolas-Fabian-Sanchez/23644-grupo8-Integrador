@@ -223,7 +223,7 @@ export const DetailMovie = () => {
             </div>
             <div className="d-flex flex-row  align-content-start  ">
               <button className="border-0 bg-light  ">
-                  <img src={Corazon} alt="favoritos" srcset="" />
+                  <img src={Corazon} alt="favoritos" srcSet="" />
               </button>
               <button className="btn btn-success mx-2">
                   Descargar poster
@@ -238,7 +238,7 @@ export const DetailMovie = () => {
           </div>
         </div>
       </div>
-      <div class="modal fade p-0" id="trailer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade p-0" id="trailer" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl h-100">
     <div class="modal-content h-100">
       <div class="modal-body p-0">
