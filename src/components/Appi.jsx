@@ -25,7 +25,7 @@ export const Appi = () => {
   return (
     <div className="container d-flex flex-wrap my-5 justify-content-between ">
       {data.map((pelicula) => (
-        <div className="card col-2 m-2 ">
+        <div className="card col-2 m-2 " key={pelicula.id}>
           <Link
             key={pelicula.id}
             to={`detailMovie/${pelicula.id}`}
