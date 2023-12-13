@@ -177,6 +177,7 @@ export const Header = () => {
                   className="btn btn-success mx-auto mb-2 px-5"
                   data-bs-dismiss="modal"
                 >
+                 
                   Aceptar
                 </button>
                 <div>
