@@ -10,7 +10,7 @@ import html2canvasLogo from "../img/html2canvas.png";
 
 export let Footer = () => {
   return (
-    <div className="container-fluid bg-primary d-flex flex-column align-items-center  flex-md-row flex-wrap py-3  justify-content-center justify-content-md-around  ">
+    <div className="container-fluid bg-primary d-flex flex-column align-items-center  flex-md-row flex-wrap   justify-content-center justify-content-md-around  ">
       <button
         type="button"
         className="btn btn-primary"
@@ -45,7 +45,7 @@ export let Footer = () => {
           src={linkedInLogo2}
           alt="LinkedIn"
           srcset=""
-          className=" img-fluid"
+          className=" img-fluid w-75"
         />
       </button>
       <div

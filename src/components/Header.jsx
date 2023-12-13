@@ -5,14 +5,14 @@ export const Header = () => {
 
   if (logIn) {
     return (
-
+      
       // botones navbar
       <nav
-        className="navbar navbar-expand-lg bg-primary text-light "
+        className="navbar navbar-expand-lg bg-primary text-light p-0"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
-          <a className="col-6 col-lg-3 m-lg-3  " href="/">
+          <a className="col-6 col-lg-3   " href="/">
             <img src={logo} alt="Youmovie" className="w-50" />
           </a>
           <button
@@ -75,7 +75,7 @@ export const Header = () => {
     return (
       // botones navbar
       <nav
-        className="navbar navbar-expand-lg bg-primary text-light "
+        className="navbar navbar-expand-lg bg-primary text-light p-0"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
@@ -176,6 +176,7 @@ export const Header = () => {
                   type="button"
                   className="btn btn-success mx-auto mb-2 px-5"
                   data-bs-dismiss="modal"
+                  
                 >
                  
                   Aceptar

@@ -246,7 +246,6 @@ export const DetailMovie = () => {
       <iframe
              width="100%"
              height="100%"
-              
               src={stateURL}
               allow="fullscreen"
             ></iframe>
