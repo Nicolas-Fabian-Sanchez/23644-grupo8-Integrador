@@ -3,6 +3,7 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { app } from '../firebaseConfig/firebase';// Importa tu archivo de configuración de Firebase
+import { authObserver } from '../helper/Observer';
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -21,10 +22,15 @@ export const FirebaseAuthService = () => {
     return () => unsubscribe();
   }, []);
 
-  const signUp = async (email, password) => {
+  const signUp = async (email, password, displayName) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
+      auth.currentUser = userCredential.user;
+      await updateProfile(userCredential.user, { displayName });
+      // Notificar a los observadores sobre el cambio en la autenticación
+      authObserver.notify(userCredential.user);
+
       return userCredential.user;
     } catch (error) {
       console.error('Error al registrar nuevo usuario:', error.message);

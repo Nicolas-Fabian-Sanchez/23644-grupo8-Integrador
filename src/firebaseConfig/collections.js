@@ -1,3 +1,4 @@
 export const dbCollections = {
-    Favorites : "favorites"
+    Favorites: "favorites",
+    Users: "users"
 }

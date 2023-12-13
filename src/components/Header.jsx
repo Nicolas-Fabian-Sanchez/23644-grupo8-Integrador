@@ -2,6 +2,7 @@ import logo from "../img/Logo2.png";
 import React, { useState, useEffect } from "react";
 import { FirebaseAuthService } from "../services/firebaseAuthService";
 import Swal from 'sweetalert2';
+import { authObserver } from '../helper/Observer';
 
 export const Header = () => {
   let logIn = false;
@@ -15,7 +16,17 @@ export const Header = () => {
   }
 
   useEffect(() => {
-    getUserFB();
+    //getUserFB();
+    const unsubscribe = authObserver.subscribe((userData) => {
+      setUser(userData);
+      console.log('Header set User', userData.email);
+    });
+
+    // Limpiar la suscripción cuando el componente se desmonta
+    return () => {
+      unsubscribe();
+    };
+
   }, [])
 
   const handleSignIn = async () => {
@@ -113,6 +124,7 @@ export const Header = () => {
                 </a>
               </li>
             </ul>
+            <div><p>{user.displayName}</p></div>
             <button
               type="button"
               className="btn btn-success mx-2 fs-5 "
