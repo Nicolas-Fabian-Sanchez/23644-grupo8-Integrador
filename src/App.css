@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+
+.cardFavorito{
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: left;
+}
+
+.cardFavorito poster{
+  width: 25%;
+  height: auto;
+}
