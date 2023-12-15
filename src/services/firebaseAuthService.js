@@ -1,6 +1,6 @@
 // firebaseAuthService.js
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { app } from '../firebaseConfig/firebase';// Importa tu archivo de configuración de Firebase
 import { authObserver } from '../helper/Observer';
@@ -94,11 +94,21 @@ export const FirebaseAuthService = () => {
     });
   };
 
+  const resetPasswordEmail = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      return true
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 
 
 
 
-  return { loading, getAuthUser, signUp, signIn, handleSignInWithGoogle, updateUser, signOut: signOutUser, };
+
+  return { loading, getAuthUser, signUp, signIn, handleSignInWithGoogle, updateUser, signOut: signOutUser,resetPasswordEmail };
 };
 
 
