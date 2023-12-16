@@ -10,7 +10,7 @@ import html2canvasLogo from "../img/html2canvas.png";
 
 export let Footer = () => {
   return (
-    <div className="container-fluid bg-primary d-flex flex-column align-items-center  flex-md-row flex-wrap py-3  justify-content-center justify-content-md-around  ">
+    <div className="container-fluid bg-primary d-flex flex-column align-items-center  flex-md-row flex-wrap pb-3  justify-content-center justify-content-md-around  ">
       <button
         type="button"
         className="btn btn-primary"

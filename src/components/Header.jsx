@@ -78,12 +78,12 @@ export const Header = () => {
 
       // botones navbar
       <nav
-        className="navbar navbar-expand-lg bg-primary text-light "
+        className="navbar navbar-expand-lg bg-primary text-light p-lg-0"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
-          <a className="col-6 col-lg-3 m-lg-3  " href="/">
-            <img src={logo} alt="Youmovie" className="w-50" />
+          <a className="col-6 col-md-3 col-lg-2 m-lg-3    " href="/">
+            <img src={logo} alt="Youmovie" className="w-100" />
           </a>
           <button
             className="navbar-toggler col-lg-0"
@@ -97,7 +97,7 @@ export const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div
-            className="collapse navbar-collapse justify-content-between col-lg-5 mx-2"
+            className="collapse navbar-collapse justify-content-between col-lg-5 "
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav  mb-2 mb-lg-0 d-flex justify-content-evenly  h-100 w-75 ">
@@ -127,13 +127,13 @@ export const Header = () => {
                 </a>
               </li>
             </ul>
-            <div><p>{user.displayName}</p></div>
+            <div><p className="m-lg-0 ps-3 p-lg-0">{user.displayName}</p></div>
             <button
               type="button"
               className="btn btn-success mx-2 fs-5 "
               onClick={handleSignOut}
             >
-              Log out
+              Exit
             </button>
           </div>
         </div>
@@ -144,12 +144,12 @@ export const Header = () => {
     return (
       // botones navbar
       <nav
-        className="navbar navbar-expand-lg bg-primary text-light "
+        className="navbar navbar-expand-lg bg-primary text-light p-lg-0"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
-          <a className="col-6 col-lg-3 m-lg-3  " href="/">
-            <img src={logo} alt="Youmovie" className="w-50" />
+          <a className="col-6 col-md-3 col-lg-2 m-lg-3    " href="/">
+            <img src={logo} alt="Youmovie" className="w-100" />
           </a>
           <button
             className="navbar-toggler col-lg-0"
