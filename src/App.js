@@ -12,13 +12,13 @@ import { RecuperoCon } from './components/RecuperoCon';
 function App() {
   return (
     <div className="h-100 d-flex flex-column justify-content-between">
-      <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<Appi />} />
         <Route path="detailMovie/:idmovie" element={<DetailMovie />} />
-        <Route path="favoritos" element={<Favorito ids={[536437, 568124]} />} />
-        <Route path='Registrarse' element={<Registrarse/>}/>
-        <Route path='RecuperoCon' element={<RecuperoCon/>}/>
+        <Route path="favoritos" element={<Favorito />} />
+        <Route path='Registrarse' element={<Registrarse />} />
+        <Route path='RecuperoCon' element={<RecuperoCon />} />
       </Routes>
       <Footer />
     </div>
