@@ -4,9 +4,9 @@ import { FirebaseAuthService } from "../services/firebaseAuthService";
 import Swal from 'sweetalert2';
 import { authObserver } from '../helper/Observer';
 import { useNavigate } from "react-router-dom";
+import googleIcon from "../img/googleIcon.png";
 
 export const Header = () => {
-  let logIn = false;
   let { getAuthUser, signIn, handleSignInWithGoogle, signOut } = FirebaseAuthService();
   let [user, setUser] = useState(null);
   const [error, setError] = useState({});
@@ -102,24 +102,26 @@ export const Header = () => {
           >
             <ul className="navbar-nav  mb-2 mb-lg-0 d-flex justify-content-evenly  h-100 w-75 ">
               <li className="nav-item ">
-                <button
+                <a
                   className=" btn btn-primary fs-2"
-                  data-bs-target="/"
-                  data-bs-toggle="modal"
-                  type="button"
+                  // data-bs-target="/"
+                  // data-bs-toggle="modal"
+                  // type="button"
+                  href= "/"
                 >
                   Películas{""}
-                </button>
+                </a>
               </li>
               <li className="nav-item">
-                <button
+                <a
                   className=" btn btn-primary fs-2"
-                  data-bs-target="/"
-                  data-bs-toggle="modal"
-                  type="button"
+                  // data-bs-target="/"
+                  // data-bs-toggle="modal"
+                  // type="button"
+                  href="/"
                 >
                   Series{" "}
-                </button>
+                </a>
               </li>
               <li>
                 <a href="/favoritos" className="btn btn-primary fs-2">
@@ -253,12 +255,16 @@ export const Header = () => {
                   <a href="./Registrarse" className=" text-white p-2 ">
                     Registrarse
                   </a>
-                  <a className=" text-white p-2 " onClick={handleSignInGoogle} data-bs-dismiss="modal">
-                    Inciar con Google
-                  </a>
                   <a href="./RecuperoCon" className=" text-white p-2 ">
                     ¿Olvidaste tu contraseña?
                   </a>
+                </div  >
+                <div className="row">
+                  <a className="w-75 row bg-light btn btn-light text-dark my-2 mx-auto text-center align-items-center " onClick={handleSignInGoogle} data-bs-dismiss="modal">
+                    <span className="col-9 text-dark m-0">Inciar con Google</span> 
+                    <img src={googleIcon} alt="google" srcset="" className="col-2 img-fluid "/>
+                  </a>
+
                 </div>
               </div>
             </div>

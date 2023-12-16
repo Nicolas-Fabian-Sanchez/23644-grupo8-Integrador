@@ -97,7 +97,7 @@ export const Favorito = ({ ids }) => {
         <div className="card mb-3 mx-5 rounded" key={pelicula.id}>
           <div className="row g-0">
             <div className="col-md-2">
-              <img id={`poster-${pelicula.id}`} src={`https://image.tmdb.org/t/p/w200${pelicula.poster_path}`} className="img-fluid rounded-start m-1" alt="..." />
+              <img id={`poster-${pelicula.id}`} src={`https://image.tmdb.org/t/p/w200${pelicula.poster_path}`} className="img-fluid rounded-start m-auto w-100" alt="..." />
             </div>
             <div className="col-md-10 d-flex flex-column 
             ">
