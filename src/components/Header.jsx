@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import { FirebaseAuthService } from "../services/firebaseAuthService";
 import Swal from 'sweetalert2';
 import { authObserver } from '../helper/Observer';
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   let logIn = false;
   let { getAuthUser, signIn, handleSignInWithGoogle, signOut } = FirebaseAuthService();
   let [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({});
+  const navigate = useNavigate();
   
   const getUserFB = async () => {
     user = await getAuthUser();
@@ -16,15 +18,15 @@ export const Header = () => {
   }
 
   useEffect(() => {
-    //getUserFB();
-    const unsubscribe = authObserver.subscribe((userData) => {
-      setUser(userData);
-      console.log('Header set User', userData.email);
+    getUserFB();
+    
+    authObserver.subscribe((user) => {
+      setUser(user !== null);
+      console.log(user);
     });
 
-    // Limpiar la suscripción cuando el componente se desmonta
     return () => {
-      unsubscribe();
+      authObserver.unsubscribe();
     };
 
   }, [])
@@ -35,14 +37,14 @@ export const Header = () => {
       let password = document.getElementById('password').value;
       const userCredential = await signIn(email, password);
       const signedInUser = userCredential.user;
-      console.log('Usuario autenticado con éxito:', signedInUser);
+      //console.log('Usuario autenticado con éxito:', signedInUser);
       setError(null);
       user = signedInUser; //ver
       setUser(user);
       
     } catch (error) {
       setError(error.message);
-      console.error('Error al iniciar sesión:', error.message);
+      //console.error('Error al iniciar sesión:', error.message);
     }
   };
 
@@ -51,22 +53,23 @@ export const Header = () => {
       const result = await handleSignInWithGoogle();
       const user = result;
       setUser(user);
-      console.log('Usuario autenticado con Google');
+      //console.log('Usuario autenticado con Google');
       Swal.fire('', `Bienvenido, ${user.email}!`, 'success');
     } catch (error) {
-      console.error('Error al autenticar con Google:', error.message);
+      //console.error('Error al autenticar con Google:', error.message);
     }
   };
 
   const handleSignOut = async () => {
     try {
       const res = await signOut();
-      console.log('Usuario cerró sesión');
+      //console.log('Usuario cerró sesión');
       if (res) {
         setUser(null);
+        navigate('/');
       }
     } catch (error) {
-      console.error('Error al cerrar sesión:', error.message);
+      //console.error('Error al cerrar sesión:', error.message);
     }
   };
 
@@ -83,7 +86,7 @@ export const Header = () => {
             <img src={logo} alt="Youmovie" className="w-50" />
           </a>
           <button
-            class="navbar-toggler col-lg-0"
+            className="navbar-toggler col-lg-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -91,7 +94,7 @@ export const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <div
             className="collapse navbar-collapse justify-content-between col-lg-5 mx-2"
@@ -105,7 +108,7 @@ export const Header = () => {
                   data-bs-toggle="modal"
                   type="button"
                 >
-                  Películas{" "}
+                  Películas{""}
                 </button>
               </li>
               <li className="nav-item">

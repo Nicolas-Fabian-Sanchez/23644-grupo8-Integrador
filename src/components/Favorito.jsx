@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 import axios from "axios";
 import Corazon from '../img/corazon.svg';
+import { FirebaseAuthService } from '../services/firebaseAuthService';
 
 export const Favorito = ({ ids }) => {
   const [pelicula, setPelicula] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
+  let [user,setUser] = useState(null);
+  let { getAuthUser } = FirebaseAuthService();
+
+  const getUserFB = async () => {
+    user = await getAuthUser();
+    setUser(user);
+  }
 
   useEffect(() => {
+    getUserFB();
     const obtenerPelicula = async () => {
       const peliculaPromesas = ids.map(async (numero) => {
         const respuesta = await fetch(`https://api.themoviedb.org/3/movie/${numero}?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX`);

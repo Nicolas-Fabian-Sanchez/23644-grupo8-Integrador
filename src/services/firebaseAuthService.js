@@ -13,13 +13,7 @@ export const FirebaseAuthService = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      auth.currentUser = user;
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
+  
   }, []);
 
   const signUp = async (email, password, displayName) => {
@@ -30,7 +24,6 @@ export const FirebaseAuthService = () => {
       await updateProfile(userCredential.user, { displayName });
       // Notificar a los observadores sobre el cambio en la autenticación
       authObserver.notify(userCredential.user);
-
       return userCredential.user;
     } catch (error) {
       console.error('Error al registrar nuevo usuario:', error.message);
@@ -43,6 +36,7 @@ export const FirebaseAuthService = () => {
       const user = await signInWithEmailAndPassword(auth, email, password);
 
       setUser(user);
+      authObserver.notify(user);
       return user;
     } catch (error) {
       console.error('Error al iniciar sesión:', error.message);
@@ -54,6 +48,7 @@ export const FirebaseAuthService = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+      authObserver.notify(user);
       return user;
       console.log('Usuario autenticado con Google:', user);
     } catch (error) {
@@ -67,6 +62,7 @@ export const FirebaseAuthService = () => {
         displayName: user.displayName,
         photoURL: 'https://example.com/nueva-imagen.jpg'
       });
+      authObserver.notify(user);
       return user;
     } catch (error) {
       console.error('Error al iniciar sesión:', error.message);
@@ -78,6 +74,7 @@ export const FirebaseAuthService = () => {
     try {
       await signOut(auth);
       setUser(null);
+      authObserver.notify(user);
       return true;
     } catch (error) {
       console.error('Error al cerrar sesión:', error.message);

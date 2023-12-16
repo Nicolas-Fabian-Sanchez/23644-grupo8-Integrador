@@ -17,10 +17,10 @@ export const Appi = () => {
         setData(responseData.results);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       }, []);
   }
-  console.log("data -" + data);
+  //console.log("data -" + data);
 
   return (
     <div className="container d-flex flex-wrap my-5 justify-content-between ">

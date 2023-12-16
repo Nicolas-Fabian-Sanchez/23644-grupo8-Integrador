@@ -38,8 +38,25 @@ export const firebaseService = {
     }
   },
 
+
   // DELETE
-  deleteDocument: async (collectionName, doc) => {
+  deleteDocument: async (collectionName, docId) => {
+    try {
+      const productoDoc = doc(db, collectionName, docId);
+      console.log('del productoDoc', collectionName + '- ' + docId);
+      await deleteDoc(productoDoc);
+      const docSnap = await getDoc(productoDoc);
+      const isDeleted = !docSnap.exists();
+      console.log('Document deleted ', isDeleted);
+      return isDeleted;
+    } catch (error) {
+      console.error('Error deleting document: ', error);
+      throw error;
+    }
+  },
+
+  // DELETE
+  /*deleteDocument: async (collectionName, doc) => {
     try {
       //obtengo el doc de la relacion
       //const coll = collection(db, collectionName);
@@ -68,7 +85,7 @@ export const firebaseService = {
       console.error('Error deleting document: ', error);
       throw error;
     }
-  },
+  },*/
 };
 
 //export default firebaseService;
