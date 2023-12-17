@@ -17,23 +17,23 @@ export const Appi = () => {
         setData(responseData.results);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       }, []);
   }
-  console.log("data -" + data);
+  //console.log("data -" + data);
 
   return (
-    <div className="container d-flex flex-wrap my-5 justify-content-between ">
+    <div className="container d-flex flex-wrap  my-auto justify-content-between py-4 ">
       {data.map((pelicula) => (
-        <div className="card col-2 m-2 " key={pelicula.id}>
+        <div className="card col-12 col-sm-5 col-md-3 col-lg-2 m-2 border-0" key={pelicula.id}>
           <Link
             key={pelicula.id}
             to={`detailMovie/${pelicula.id}`}
             className="link-offset-2 link-underline link-underline-opacity-0 text-black "
           >
-            <div className="pelicula card-body " key={pelicula.id}>
+            <div className="pelicula card-body p-0  " key={pelicula.id}>
               <img
-                className="poster card-img mb-2"
+                className="poster card-img img-fluid"
                 src={`https://image.tmdb.org/t/p/w500/${pelicula.poster_path}`}
                 alt={pelicula.title}
               />

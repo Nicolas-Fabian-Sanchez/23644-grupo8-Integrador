@@ -10,7 +10,8 @@ import html2canvasLogo from "../img/html2canvas.png";
 
 export let Footer = () => {
   return (
-    <div className="container-fluid bg-primary d-flex flex-column align-items-center  flex-md-row flex-wrap   justify-content-center justify-content-md-around  ">
+    <div className="container-fluid bg-primary d-flex flex-column align-items-center  flex-md-row flex-wrap pb-3  justify-content-center justify-content-md-around  ">
+
       <button
         type="button"
         className="btn btn-primary"
@@ -44,14 +45,14 @@ export let Footer = () => {
         <img
           src={linkedInLogo2}
           alt="LinkedIn"
-          srcset=""
-          className=" img-fluid w-75"
-        />
+          srcSet=""
+          className=" img-fluid"
+          />
       </button>
       <div
         className="modal fade"
         id="Sobre-nosotros"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -85,7 +86,7 @@ export let Footer = () => {
       <div
         className="modal fade"
         id="Documentacion"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -112,7 +113,7 @@ export let Footer = () => {
       <div
         className="modal fade"
         id="Tecnologias-utilizadas"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -188,7 +189,7 @@ export let Footer = () => {
       <div
         className="modal fade"
         id="LinedIn"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >

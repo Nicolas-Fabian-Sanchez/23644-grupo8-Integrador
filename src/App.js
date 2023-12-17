@@ -16,9 +16,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Appi />} />
         <Route path="detailMovie/:idmovie" element={<DetailMovie />} />
-        <Route path="favoritos" element={<Favorito ids={[536437, 568124]} />} />
-        <Route path='Registrarse' element={<Registrarse/>}/>
-        <Route path='RecuperoCon' element={<RecuperoCon/>}/>
+        <Route path="favoritos" element={<Favorito />} />
+        <Route path='Registrarse' element={<Registrarse />} />
+        <Route path='RecuperoCon' element={<RecuperoCon />} />
       </Routes>
       <Footer />
     </div>

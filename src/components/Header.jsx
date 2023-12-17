@@ -1,22 +1,92 @@
 import logo from "../img/Logo2.png";
+import React, { useState, useEffect } from "react";
+import { FirebaseAuthService } from "../services/firebaseAuthService";
+import Swal from 'sweetalert2';
+import { authObserver } from '../helper/Observer';
+import { useNavigate } from "react-router-dom";
+import googleIcon from "../img/googleIcon.png";
 
 export const Header = () => {
-  let logIn = false;
+  let { getAuthUser, signIn, handleSignInWithGoogle, signOut } = FirebaseAuthService();
+  let [user, setUser] = useState(null);
+  const [error, setError] = useState({});
+  const navigate = useNavigate();
+  
+  const getUserFB = async () => {
+    user = await getAuthUser();
+    setUser(user);
+  }
 
-  if (logIn) {
+  useEffect(() => {
+    getUserFB();
+    
+    authObserver.subscribe((user) => {
+      setUser(user !== null);
+      console.log(user);
+    });
+
+    return () => {
+      authObserver.unsubscribe();
+    };
+
+  }, [])
+
+  const handleSignIn = async () => {
+    try {
+      let email = document.getElementById('email').value;
+      let password = document.getElementById('password').value;
+      const userCredential = await signIn(email, password);
+      const signedInUser = userCredential.user;
+      //console.log('Usuario autenticado con éxito:', signedInUser);
+      setError(null);
+      user = signedInUser; //ver
+      setUser(user);
+      
+    } catch (error) {
+      setError(error.message);
+      //console.error('Error al iniciar sesión:', error.message);
+    }
+  };
+
+  const handleSignInGoogle = async () => {
+    try {
+      const result = await handleSignInWithGoogle();
+      const user = result;
+      setUser(user);
+      //console.log('Usuario autenticado con Google');
+      Swal.fire('', `Bienvenido, ${user.email}!`, 'success');
+    } catch (error) {
+      //console.error('Error al autenticar con Google:', error.message);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      const res = await signOut();
+      //console.log('Usuario cerró sesión');
+      if (res) {
+        setUser(null);
+        navigate('/');
+      }
+    } catch (error) {
+      //console.error('Error al cerrar sesión:', error.message);
+    }
+  };
+
+  if (user) {
     return (
       
       // botones navbar
-      <nav
-        className="navbar navbar-expand-lg bg-primary text-light p-0"
+      <nav 
+        className="navbar navbar-expand-lg bg-primary text-light p-lg-0"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
-          <a className="col-6 col-lg-3   " href="/">
-            <img src={logo} alt="Youmovie" className="w-50" />
+          <a className="col-6 col-md-3 col-lg-2 m-lg-3    " href="/">
+            <img src={logo} alt="Youmovie" className="w-100" />
           </a>
           <button
-            class="navbar-toggler col-lg-0"
+            className="navbar-toggler col-lg-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -24,32 +94,34 @@ export const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <div
-            className="collapse navbar-collapse justify-content-between col-lg-5 mx-2"
+            className="collapse navbar-collapse justify-content-between col-lg-5 "
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav  mb-2 mb-lg-0 d-flex justify-content-evenly  h-100 w-75 ">
               <li className="nav-item ">
-                <button
+                <a
                   className=" btn btn-primary fs-2"
-                  data-bs-target="/"
-                  data-bs-toggle="modal"
-                  type="button"
+                  // data-bs-target="/"
+                  // data-bs-toggle="modal"
+                  // type="button"
+                  href= "/"
                 >
-                  Películas{" "}
-                </button>
+                  Películas{""}
+                </a>
               </li>
               <li className="nav-item">
-                <button
+                <a
                   className=" btn btn-primary fs-2"
-                  data-bs-target="/"
-                  data-bs-toggle="modal"
-                  type="button"
+                  // data-bs-target="/"
+                  // data-bs-toggle="modal"
+                  // type="button"
+                  href="/"
                 >
                   Series{" "}
-                </button>
+                </a>
               </li>
               <li>
                 <a href="/favoritos" className="btn btn-primary fs-2">
@@ -57,14 +129,13 @@ export const Header = () => {
                 </a>
               </li>
             </ul>
+            <div><p className="m-lg-0 ps-3 p-lg-0">{user.displayName}</p></div>
             <button
               type="button"
               className="btn btn-success mx-2 fs-5 "
-              data-bs-toggle="modal"
-              data-bs-target=""
-              href="/"
+              onClick={handleSignOut}
             >
-              Log out
+              Exit
             </button>
           </div>
         </div>
@@ -75,12 +146,12 @@ export const Header = () => {
     return (
       // botones navbar
       <nav
-        className="navbar navbar-expand-lg bg-primary text-light p-0"
+        className="navbar navbar-expand-lg bg-primary text-light p-lg-0"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
-          <a className="col-6 col-lg-3 m-lg-3  " href="/">
-            <img src={logo} alt="Youmovie" className="w-50" />
+          <a className="col-6 col-md-3 col-lg-2 m-lg-3    " href="/">
+            <img src={logo} alt="Youmovie" className="w-100" />
           </a>
           <button
             className="navbar-toggler col-lg-0"
@@ -134,7 +205,7 @@ export const Header = () => {
         <div
           className="modal fade"
           id="LogIn"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -150,7 +221,7 @@ export const Header = () => {
               </div>
               <div className="modal-body border-0 w-75 mx-auto">
                 <div className="mb-3">
-                  <label for="email" className="form-label fs-3">
+                  <label htmlFor="email" className="form-label fs-3">
                     Email
                   </label>
                   <input
@@ -161,12 +232,12 @@ export const Header = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="Contraseña" className="form-label fs-3">
+                  <label htmlFor="password" className="form-label fs-3">
                     Contraseña
                   </label>
                   <input
                     className="form-control"
-                    id="Contraseña"
+                    id="password"
                     type="password"
                   ></input>
                 </div>
@@ -176,9 +247,8 @@ export const Header = () => {
                   type="button"
                   className="btn btn-success mx-auto mb-2 px-5"
                   data-bs-dismiss="modal"
-                  
-                >
-                 
+                  onClick={handleSignIn}
+                  >
                   Aceptar
                 </button>
                 <div>
@@ -188,6 +258,13 @@ export const Header = () => {
                   <a href="./RecuperoCon" className=" text-white p-2 ">
                     ¿Olvidaste tu contraseña?
                   </a>
+                </div  >
+                <div className="row">
+                  <a className="w-75 row bg-light btn btn-light text-dark my-2 mx-auto text-center align-items-center " onClick={handleSignInGoogle} data-bs-dismiss="modal">
+                    <span className="col-9 text-dark m-0">Inciar con Google</span> 
+                    <img src={googleIcon} alt="google" srcset="" className="col-2 img-fluid "/>
+                  </a>
+
                 </div>
               </div>
             </div>
