@@ -23,6 +23,7 @@ export const DetailMovie = () => {
   let idmovie = params.idmovie;
   let type = params.type;
   //console.log(idmovie);
+  let youtubeIframe;
 
   const URL_PATH = "https://image.tmdb.org/t/p/w500";
   const API_KEY = "9ad816b5e30fc1892635fae8cf7940f2";
@@ -47,7 +48,7 @@ export const DetailMovie = () => {
     getMovieTrailer();
     getDetailMovie();
     //getCredits();
-    
+
     authObserver.subscribe((user) => {
       setUser(user !== null);
       console.log(user);
@@ -93,7 +94,8 @@ export const DetailMovie = () => {
           setURL("https://www.youtube.com/embed/Iqr3XIhSnUQ?autoplay=1");
           // console.log('no encotro trailer');
         }
-
+        youtubeIframe = document.getElementById('youtubeIframe');
+        youtubeIframe.src = stateURL;
         return response;
       })
       .catch((error) => {
@@ -162,14 +164,14 @@ export const DetailMovie = () => {
       return alert('Logueese');
     }
     if (favorite == false) {
-      addFavorite(idmovie, user.uid,type);
+      addFavorite(idmovie, user.uid, type);
     } else {
-      deleteFavorite(idmovie, user.uid,type);
+      deleteFavorite(idmovie, user.uid, type);
     }
   }
 
-  const addFavorite = async (idmovie, iduser,type) => {
-    let favorite = { 'idmovie': idmovie, 'iduser': iduser,'type':type };
+  const addFavorite = async (idmovie, iduser, type) => {
+    let favorite = { 'idmovie': idmovie, 'iduser': iduser, 'type': type };
     const productsP = firebaseServiceFavorites.addDocument(dbCollections.Favorites, favorite)
       .then(id => {
         setFavorite(true);
@@ -193,13 +195,23 @@ export const DetailMovie = () => {
   }
 
   const getFavorite = async () => {
-    const favoritesPromise = firebaseServiceFavorites.getDocumentById(dbCollections.Favorites, user.uid, idmovie,type)
+    const favoritesPromise = firebaseServiceFavorites.getDocumentById(dbCollections.Favorites, user.uid, idmovie, type)
       .then(res => {
         setFavorite(res);
       })
       .catch(error => {
         //console.error('Error getting documents: ', error);
       });
+  }
+
+
+  
+  function stopYouTubeVideo() {
+    // Obtén el elemento iframe
+    youtubeIframe = document.getElementById('youtubeIframe');
+    if (youtubeIframe) {
+      youtubeIframe.src = ''; // Cambia el src para detener el video
+    }
   }
 
 
@@ -215,7 +227,7 @@ export const DetailMovie = () => {
                 alt={stateMovie.title}
               />
             )}
-           { /*<img
+            { /*<img
               className="img-fluid custom-image"
               src={`https://image.tmdb.org/t/p/w500/${stateMovie.poster_path}`}
               alt={stateMovie.title}
@@ -319,13 +331,13 @@ export const DetailMovie = () => {
               <button className="btn btn-success mx-2">
                 Descargar poster
               </button>
-              { type==='movie'&&(
-              <button className="btn btn-success " type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#trailer">
-                Ver trailer
-              </button>)
-            }
+              {type === 'movie' && (
+                <button className="btn btn-success " type="button" onClick={getMovieTrailer}
+                  data-bs-toggle="modal"
+                  data-bs-target="#trailer">
+                  Ver trailer
+                </button>)
+              }
             </div>
           </div>
         </div>
@@ -334,11 +346,11 @@ export const DetailMovie = () => {
         <div className="modal-dialog modal-xl h-100">
           <div className="modal-content h-100">
             <div className="modal-body p-0">
-              <button type="button" className="btn-close position-absolute end-0 border rounded-5 border-3  me-2 mt-2 text-bg-light " data-bs-dismiss="modal" aria-label="Close"></button>
+              <button onClick={stopYouTubeVideo} type="button" className="btn-close position-absolute end-0 border rounded-5 border-3  me-2 mt-2 text-bg-light " data-bs-dismiss="modal" aria-label="Close"></button>
               <iframe
                 width="100%"
                 height="100%"
-
+                id="youtubeIframe"
                 src={stateURL}
                 allow="fullscreen"
               ></iframe>
