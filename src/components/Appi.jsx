@@ -1,49 +1,87 @@
-import { useState, useEffect } from "react";
+
+// paginado infinito
+
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+import '../css/style-swiper.css';
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules';
 
 export const Appi = () => {
   const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    getMovies();
-  }, []);
+    getMovies(currentPage);
+  }, [currentPage]);
 
-  function getMovies() {
+  function getMovies(page) {
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX&page=5"
+      `https://api.themoviedb.org/3/movie/popular?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX&page=${page}`
     )
       .then((response) => response.json())
       .then((responseData) => {
-        setData(responseData.results);
+        setData((prevData) => [...prevData, ...responseData.results]);
       })
       .catch((error) => {
-        //console.log(error);
-      }, []);
+        console.error("Error fetching movies:", error);
+      });
   }
-  //console.log("data -" + data);
 
   return (
-    <div className="container d-flex flex-wrap  my-auto justify-content-between py-4 ">
-      {data.map((pelicula) => (
-        <div className="card col-12 col-sm-5 col-md-3 col-lg-2 m-2 border-0" key={pelicula.id}>
-          <Link
-            key={pelicula.id}
-            to={`detailMovie/${pelicula.id}`}
-            className="link-offset-2 link-underline link-underline-opacity-0 text-black "
-          >
-            <div className="pelicula card-body p-0  " key={pelicula.id}>
-              <img
-                className="poster card-img img-fluid"
-                src={`https://image.tmdb.org/t/p/w500/${pelicula.poster_path}`}
-                alt={pelicula.title}
-              />
-              <h5 className="titulo card-title text-truncate ">
-                {pelicula.title}{" "}
-              </h5>
-            </div>
-          </Link>
-        </div>
-      ))}
-    </div>
+    <>
+      <Swiper
+        initialSlide={0}
+        spaceBetween={1}
+        slidesPerView={1}
+        centeredSlides={false}
+        slidesPerGroup={1}
+        slidesPerGroupSkip={1}
+        grabCursor={false}
+        keyboard={{
+          enabled: true,
+        }}
+        breakpoints={{
+          769: {
+            initialSlide:15,
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+          },
+        }}
+        scrollbar={true}
+        navigation={true}
+        pagination={{
+          clickable: true,
+        }}
+        onSwiper={(swiper) => {
+          swiper.on("reachEnd", () => {
+            // Cargar más datos cuando se llega al final
+            setCurrentPage((prevPage) => prevPage + 1);
+          });
+        }}
+        modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+        className="mySwiper"
+      >
+        {data.map((pelicula) => (
+          <SwiperSlide key={pelicula.id}>
+            <Link to={`detailMovie/${pelicula.id}`}>
+              <div className="pelicula card-body p-0">
+                <img
+                  className="poster card-img img-fluid"
+                  src={`https://image.tmdb.org/t/p/w500/${pelicula.poster_path}`}
+                  alt={pelicula.title}
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
   );
 };
