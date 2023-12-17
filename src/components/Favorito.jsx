@@ -163,9 +163,9 @@ export const Favorito = () => {
           </div>
         ))
         ) : (
-          <div className="d-flex align-items-center justify-content-center vh-100">
+          <div className="d-flex align-items-center justify-content-center vh-50">
            
-            <h3  className="card-title fw-bold mb-3">No tiene favoritos guardados</h3>
+            <h3  className="card-title fw-bold mb-3">No tienes favoritos guardados</h3>
             
           </div>
         )

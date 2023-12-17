@@ -78,11 +78,11 @@ export const Header = () => {
 
       // botones navbar
       <nav
-        className="navbar navbar-expand-lg bg-primary text-light p-lg-0"
+        className="navbar navbar-expand-lg bg-primary text-light py-md-1"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
-          <a className="col-6 col-md-3 col-lg-2 m-lg-3    " href="/">
+          <a className="col-4 col-sm-3 col-md-2 col-lg-1 m-lg-3" href="/">
             <img src={logo} alt="Youmovie" className="w-100" />
           </a>
           <button
@@ -132,7 +132,7 @@ export const Header = () => {
             <div><p className="m-lg-0 ps-3 p-lg-0">{user.displayName}</p></div>
             <button
               type="button"
-              className="btn btn-success mx-2 fs-5 "
+              className="btn btn-success mx-2 fs-5 mb-md-2 mb-lg-0"
               onClick={handleSignOut}
             >
               Exit
@@ -146,11 +146,11 @@ export const Header = () => {
     return (
       // botones navbar
       <nav
-        className="navbar navbar-expand-lg bg-primary text-light p-lg-0"
+        className="navbar navbar-expand-lg bg-primary text-light py-md-0"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
-          <a className="col-6 col-md-3 col-lg-2 m-lg-3    " href="/">
+          <a className="col-4 col-sm-3 col-md-2 col-lg-1 m-lg-3" href="/">
             <img src={logo} alt="Youmovie" className="w-100" />
           </a>
           <button
