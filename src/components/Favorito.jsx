@@ -27,8 +27,11 @@ export const Favorito = () => {
     const obtenerPelicula = async () => {
       if (favIds !== null) {
         const peliculaPromesas = favIds.map(async (data) => {
-          const respuesta = await fetch(`https://api.themoviedb.org/3/movie/${data.idmovie}?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX`);
-          const jsonpelicula = await respuesta.json();
+
+          const respuesta = await fetch(`https://api.themoviedb.org/3/${data.type}/${data.idmovie}?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX`);
+          let jsonpelicula = await respuesta.json();
+          jsonpelicula.type = data.type;
+
           return jsonpelicula;
         });
 
@@ -82,10 +85,12 @@ export const Favorito = () => {
 
   //Obtener pelicula actual
 
-  function getDetailMovie(idmovie) {
+  function getDetailMovie(idmovie, type) {
     let movie = [];
 
-    let urlMovieTrailers = `https://api.themoviedb.org/3/movie/${idmovie}/videos?api_key=9ad816b5e30fc1892635fae8cf7940f2`;
+
+    let urlMovieTrailers = `https://api.themoviedb.org/3/${type}/${idmovie}/videos?api_key=9ad816b5e30fc1892635fae8cf7940f2`;
+
 
     axios.get(urlMovieTrailers).then((response) => {
 
@@ -126,7 +131,9 @@ export const Favorito = () => {
   return (
 
     <div className='my-5'>
-      {!loading  &&  pelicula.length > 0 && <h2 className='text-start mx-5 mb-4'>Favoritos</h2>}
+
+      {!loading && pelicula.length > 0 && <h2 className='text-start mx-5 mb-4'>Favoritos</h2>}
+
       {loading &&
         <div className="d-flex align-items-center justify-content-center vh-100">
           <RotatingLines
@@ -155,7 +162,8 @@ export const Favorito = () => {
                 </div>
                 <div className='d-flex mt-3 g-3 '>
                   <img src={Corazon} alt="Corazon de Favoritos" className='mx-2' onClick={() => handleEliminarPelicula(pelicula.id)} />
-                  <button className='btn btn-primary my-3 mx-2' onClick={() => getDetailMovie(pelicula.id)}>Ver Trailer</button>
+
+
                   <button className='btn btn-primary my-3 mx-2' onClick={() => handleDescargarPoster(pelicula.id)}>Descargar Poster</button>
                 </div>
               </div>
@@ -163,10 +171,10 @@ export const Favorito = () => {
           </div>
         ))
         ) : (
-          <div className="d-flex align-items-center justify-content-center vh-100">
-           
-            <h3  className="card-title fw-bold mb-3">No tiene favoritos guardados</h3>
-            
+
+          <div className="d-flex align-items-center justify-content-center vh-50">
+            <h3  className="card-title fw-bold mb-3">No tienes favoritos guardados</h3>
+
           </div>
         )
 
