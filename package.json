@@ -17,10 +17,9 @@
     "react-router-dom": "^6.18.0",
     "react-scripts": "5.0.1",
     "sweetalert2-react-content": "^5.0.7",
-<<<<<<< HEAD
-=======
+
     "swiper": "^11.0.5",
->>>>>>> desarrollo
+
     "web-vitals": "^2.1.4"
   },
   "scripts": {
