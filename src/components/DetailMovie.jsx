@@ -21,6 +21,7 @@ export const DetailMovie = () => {
 
   const params = useParams();
   let idmovie = params.idmovie;
+  let type = params.type;
   //console.log(idmovie);
 
   const URL_PATH = "https://image.tmdb.org/t/p/w500";
@@ -59,7 +60,7 @@ export const DetailMovie = () => {
 
   async function getMovieTrailer() {
     let movie = [];
-    let urlMovieTrailers = `https://api.themoviedb.org/3/movie/${idmovie}/videos`;
+    let urlMovieTrailers = `https://api.themoviedb.org/3/${type}/${idmovie}/videos`;
 
     const params = {
       api_key: API_KEY,
@@ -103,7 +104,7 @@ export const DetailMovie = () => {
   }
 
   async function getDetailMovie() {
-    let urlMovieDetail = `https://api.themoviedb.org/3/movie/${idmovie}`;
+    let urlMovieDetail = `https://api.themoviedb.org/3/${type}/${idmovie}`;
     const params = {
       api_key: API_KEY,
       language: LANGUAGE_ES,
@@ -161,14 +162,14 @@ export const DetailMovie = () => {
       return alert('Logueese');
     }
     if (favorite == false) {
-      addFavorite(idmovie, user.uid);
+      addFavorite(idmovie, user.uid,type);
     } else {
-      deleteFavorite(idmovie, user.uid);
+      deleteFavorite(idmovie, user.uid,type);
     }
   }
 
-  const addFavorite = async (idmovie, iduser) => {
-    let favorite = { 'idmovie': idmovie, 'iduser': iduser };
+  const addFavorite = async (idmovie, iduser,type) => {
+    let favorite = { 'idmovie': idmovie, 'iduser': iduser,'type':type };
     const productsP = firebaseServiceFavorites.addDocument(dbCollections.Favorites, favorite)
       .then(id => {
         setFavorite(true);
@@ -192,7 +193,7 @@ export const DetailMovie = () => {
   }
 
   const getFavorite = async () => {
-    const favoritesPromise = firebaseServiceFavorites.getDocumentById(dbCollections.Favorites, user.uid, idmovie)
+    const favoritesPromise = firebaseServiceFavorites.getDocumentById(dbCollections.Favorites, user.uid, idmovie,type)
       .then(res => {
         setFavorite(res);
       })
@@ -318,12 +319,13 @@ export const DetailMovie = () => {
               <button className="btn btn-success mx-2">
                 Descargar poster
               </button>
+              { type==='movie'&&(
               <button className="btn btn-success " type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#trailer">
                 Ver trailer
-              </button>
-
+              </button>)
+            }
             </div>
           </div>
         </div>

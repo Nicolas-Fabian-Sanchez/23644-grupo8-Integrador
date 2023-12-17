@@ -11,7 +11,7 @@ export const Header = () => {
   let [user, setUser] = useState(null);
   const [error, setError] = useState({});
   const navigate = useNavigate();
-  
+
   const getUserFB = async () => {
     user = await getAuthUser();
     setUser(user);
@@ -19,7 +19,7 @@ export const Header = () => {
 
   useEffect(() => {
     getUserFB();
-    
+
     authObserver.subscribe((user) => {
       setUser(user !== null);
       console.log(user);
@@ -41,7 +41,7 @@ export const Header = () => {
       setError(null);
       user = signedInUser; //ver
       setUser(user);
-      
+      navigate('/');
     } catch (error) {
       setError(error.message);
       //console.error('Error al iniciar sesión:', error.message);
@@ -55,6 +55,7 @@ export const Header = () => {
       setUser(user);
       //console.log('Usuario autenticado con Google');
       Swal.fire('', `Bienvenido, ${user.email}!`, 'success');
+      navigate('/');
     } catch (error) {
       //console.error('Error al autenticar con Google:', error.message);
     }
@@ -107,7 +108,7 @@ export const Header = () => {
                   // data-bs-target="/"
                   // data-bs-toggle="modal"
                   // type="button"
-                  href= "/"
+                  href="/movie"
                 >
                   Películas{""}
                 </a>
@@ -118,7 +119,7 @@ export const Header = () => {
                   // data-bs-target="/"
                   // data-bs-toggle="modal"
                   // type="button"
-                  href="/"
+                  href="/tv"
                 >
                   Series{" "}
                 </a>
@@ -170,24 +171,42 @@ export const Header = () => {
           >
             <ul className="navbar-nav  mb-2 mb-lg-0 d-flex justify-content-evenly  h-100 w-75 ">
               <li className="nav-item ">
-                <button
+                { /*<button
                   className=" btn btn-primary fs-2"
                   data-bs-target="#LogIn"
                   data-bs-toggle="modal"
                   type="button"
                 >
                   Películas{" "}
-                </button>
+    </button>*/}
+                <a
+                  className=" btn btn-primary fs-2"
+                  // data-bs-target="/"
+                  // data-bs-toggle="modal"
+                  // type="button"
+                  href="/movie"
+                >
+                  Películas{" "}
+                </a>
               </li>
               <li className="nav-item">
-                <button
+               {/* <button
                   className=" btn btn-primary fs-2"
                   data-bs-target="#LogIn"
                   data-bs-toggle="modal"
                   type="button"
                 >
                   Series{" "}
-                </button>
+  </button>*/}
+   <a
+                  className=" btn btn-primary fs-2"
+                  // data-bs-target="/"
+                  // data-bs-toggle="modal"
+                  // type="button"
+                  href="/tv"
+                >
+                  Series{" "}
+                </a>
               </li>
             </ul>
             <button
@@ -261,8 +280,8 @@ export const Header = () => {
                 </div  >
                 <div className="row">
                   <a className="w-75 row bg-light btn btn-light text-dark my-2 mx-auto text-center align-items-center " onClick={handleSignInGoogle} data-bs-dismiss="modal">
-                    <span className="col-9 text-dark m-0">Inciar con Google</span> 
-                    <img src={googleIcon} alt="google" srcset="" className="col-2 img-fluid "/>
+                    <span className="col-9 text-dark m-0">Inciar con Google</span>
+                    <img src={googleIcon} alt="google" srcset="" className="col-2 img-fluid " />
                   </a>
 
                 </div>

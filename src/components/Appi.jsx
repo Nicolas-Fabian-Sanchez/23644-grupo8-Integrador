@@ -11,18 +11,32 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules';
+import { link, useParams } from "react-router-dom";
 
 export const Appi = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const params = useParams();
+  let [type, setType] = useState('/');
 
   useEffect(() => {
-    getMovies(currentPage);
+    type = params.type;
+   
+    console.log('type ', type);
+    type = type == '/'|| type==undefined ? 'movie' : type == 'movie' ? 'movie' : 'tv';
+    setType(type);
+    console.log(type);
+    if (type == 'tv') {
+
+      getMovies(currentPage, type);
+    } else {
+      getMovies(currentPage, 'movie');
+    }
   }, [currentPage]);
 
-  function getMovies(page) {
+  function getMovies(page, type) {
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX&page=${page}`
+      `https://api.themoviedb.org/3/${type}/popular?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX&page=${page}`
     )
       .then((response) => response.json())
       .then((responseData) => {
@@ -48,7 +62,7 @@ export const Appi = () => {
         }}
         breakpoints={{
           769: {
-            initialSlide:15,
+            initialSlide: 15,
             slidesPerView: 5,
             slidesPerGroup: 5,
           },
@@ -69,7 +83,7 @@ export const Appi = () => {
       >
         {data.map((pelicula) => (
           <SwiperSlide key={pelicula.id}>
-            <Link to={`detailMovie/${pelicula.id}`}>
+            <Link to={`../detailMovie/${pelicula.id}/${type}`}>
               <div className="pelicula card-body p-0">
                 <img
                   className="poster card-img img-fluid"
