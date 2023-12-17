@@ -25,13 +25,16 @@ export const Favorito = () => {
 
 
     const obtenerPelicula = async () => {
-      const peliculaPromesas = favIds.map(async (data) => {
-        const respuesta = await fetch(`https://api.themoviedb.org/3/movie/${data.idmovie}?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX`);
-        const jsonpelicula = await respuesta.json();
-        return jsonpelicula;
-      });
-      const peliculas = await Promise.all(peliculaPromesas);
-      setPelicula(peliculas);
+      if (favIds !== null) {
+        const peliculaPromesas = favIds.map(async (data) => {
+          const respuesta = await fetch(`https://api.themoviedb.org/3/movie/${data.idmovie}?api_key=9ad816b5e30fc1892635fae8cf7940f2&language=es-MX`);
+          const jsonpelicula = await respuesta.json();
+          return jsonpelicula;
+        });
+
+        const peliculas = await Promise.all(peliculaPromesas);
+        setPelicula(peliculas);
+      }
       setLoading(false);
     };
 
@@ -123,22 +126,22 @@ export const Favorito = () => {
   return (
 
     <div className='my-5'>
-      {!loading &&  <h2 className='text-start mx-5 mb-4'>Favoritos</h2>}
-      {loading && 
+      {!loading  &&  pelicula.length > 0 && <h2 className='text-start mx-5 mb-4'>Favoritos</h2>}
+      {loading &&
         <div className="d-flex align-items-center justify-content-center vh-100">
-        <RotatingLines
-        strokeColor="grey"
-        strokeWidth="5"
-        animationDuration="0.75"
-        width="96"
-        visible={true}
-        />
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
         </div>
-       
+
       } {/* Muestra el spinner mientras loading es true */}
-      {!loading && 
-      
-      (pelicula.map((pelicula) => (
+      {!loading &&
+        pelicula.length > 0 ?
+        (pelicula.map((pelicula) => (
           <div className="card mb-3 mx-5 rounded" key={pelicula.id}>
             <div className="row g-0">
               <div className="col-md-2">
@@ -159,7 +162,15 @@ export const Favorito = () => {
             </div>
           </div>
         ))
-      )}
+        ) : (
+          <div className="d-flex align-items-center justify-content-center vh-100">
+           
+            <h3  className="card-title fw-bold mb-3">No tiene favoritos guardados</h3>
+            
+          </div>
+        )
+
+      }
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
