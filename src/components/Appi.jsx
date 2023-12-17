@@ -43,6 +43,7 @@ export const Appi = () => {
         setData((prevData) => [...prevData, ...responseData.results]);
       })
       .catch((error) => {
+
         console.error("Error fetching movies:", error);
       });
   }
@@ -97,5 +98,6 @@ export const Appi = () => {
         ))}
       </Swiper>
     </>
+
   );
 };

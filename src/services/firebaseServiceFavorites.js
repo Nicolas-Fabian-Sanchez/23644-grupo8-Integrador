@@ -16,7 +16,9 @@ const firebaseServiceFavorites = {
 
       if (!querySnapshot.empty) {
         // Obtener el ID del documento
+
         const documents = querySnapshot.docs.map(doc => ({ id: doc.id, idmovie:doc.data().idmovie,type:doc.data().type }));
+
         console.log('documents', documents);
         return documents;
      
@@ -32,11 +34,13 @@ const firebaseServiceFavorites = {
   },
 
   //READ
+
   getDocumentById: async (collectionName, iduser, idmovie,type) => {
     try {
       //obtengo el doc de la relacion
       //const coll = collection(db, collectionName);
       const q = query(collection(db, collectionName), where('idmovie', '==', idmovie), where('iduser', '==', iduser), where('type', '==', type));
+
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {

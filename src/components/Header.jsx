@@ -12,6 +12,7 @@ export const Header = () => {
   const [error, setError] = useState({});
   const navigate = useNavigate();
 
+
   const getUserFB = async () => {
     user = await getAuthUser();
     setUser(user);
@@ -41,7 +42,9 @@ export const Header = () => {
       setError(null);
       user = signedInUser; //ver
       setUser(user);
+
       navigate('/');
+
     } catch (error) {
       setError(error.message);
       //console.error('Error al iniciar sesión:', error.message);
@@ -55,7 +58,9 @@ export const Header = () => {
       setUser(user);
       //console.log('Usuario autenticado con Google');
       Swal.fire('', `Bienvenido, ${user.email}!`, 'success');
+
       navigate('/');
+
     } catch (error) {
       //console.error('Error al autenticar con Google:', error.message);
     }
@@ -76,14 +81,16 @@ export const Header = () => {
 
   if (user) {
     return (
-
+      
       // botones navbar
+
       <nav
         className="navbar navbar-expand-lg bg-primary text-light py-md-1"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
           <a className="col-4 col-sm-3 col-md-2 col-lg-1 m-lg-3" href="/">
+
             <img src={logo} alt="Youmovie" className="w-100" />
           </a>
           <button
@@ -108,7 +115,9 @@ export const Header = () => {
                   // data-bs-target="/"
                   // data-bs-toggle="modal"
                   // type="button"
+
                   href="/movie"
+
                 >
                   Películas{""}
                 </a>
@@ -119,7 +128,9 @@ export const Header = () => {
                   // data-bs-target="/"
                   // data-bs-toggle="modal"
                   // type="button"
+
                   href="/tv"
+ 
                 >
                   Series{" "}
                 </a>
@@ -133,7 +144,9 @@ export const Header = () => {
             <div><p className="m-lg-0 ps-3 p-lg-0">{user.displayName}</p></div>
             <button
               type="button"
+
               className="btn btn-success mx-2 fs-5 mb-md-2 mb-lg-0"
+
               onClick={handleSignOut}
             >
               Exit
@@ -147,11 +160,13 @@ export const Header = () => {
     return (
       // botones navbar
       <nav
+
         className="navbar navbar-expand-lg bg-primary text-light py-md-0"
         data-bs-theme="light"
       >
         <div className="container-fluid ">
           <a className="col-4 col-sm-3 col-md-2 col-lg-1 m-lg-3" href="/">
+
             <img src={logo} alt="Youmovie" className="w-100" />
           </a>
           <button
@@ -267,7 +282,9 @@ export const Header = () => {
                   className="btn btn-success mx-auto mb-2 px-5"
                   data-bs-dismiss="modal"
                   onClick={handleSignIn}
+
                 >
+
                   Aceptar
                 </button>
                 <div>
@@ -280,8 +297,10 @@ export const Header = () => {
                 </div  >
                 <div className="row">
                   <a className="w-75 row bg-light btn btn-light text-dark my-2 mx-auto text-center align-items-center " onClick={handleSignInGoogle} data-bs-dismiss="modal">
+
                     <span className="col-9 text-dark m-0">Inciar con Google</span>
                     <img src={googleIcon} alt="google" srcset="" className="col-2 img-fluid " />
+
                   </a>
 
                 </div>

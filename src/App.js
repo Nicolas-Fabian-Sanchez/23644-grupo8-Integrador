@@ -14,9 +14,11 @@ function App() {
     <div className="h-100 d-flex flex-column justify-content-between">
       <Header />
       <Routes>
+
       <Route path="/" element={<Appi />} />
         <Route path="/:type" element={<Appi />} />
         <Route path="detailMovie/:idmovie/:type" element={<DetailMovie />} />
+
         <Route path="favoritos" element={<Favorito />} />
         <Route path='Registrarse' element={<Registrarse />} />
         <Route path='RecuperoCon' element={<RecuperoCon />} />

@@ -10,7 +10,9 @@ import html2canvasLogo from "../img/html2canvas.png";
 
 export let Footer = () => {
   return (
+
     <div className="container-fluid bg-primary d-flex flex-column align-items-center  flex-md-row pb-3  justify-content-center justify-content-md-around  ">
+
       <button
         type="button"
         className="btn btn-primary"
@@ -46,7 +48,7 @@ export let Footer = () => {
           alt="LinkedIn"
           srcSet=""
           className=" img-fluid"
-        />
+          />
       </button>
       <div
         className="modal fade"

@@ -21,7 +21,9 @@ export const DetailMovie = () => {
 
   const params = useParams();
   let idmovie = params.idmovie;
+
   let type = params.type;
+
   //console.log(idmovie);
   let youtubeIframe;
 
@@ -164,14 +166,18 @@ export const DetailMovie = () => {
       return alert('Logueese');
     }
     if (favorite == false) {
+
       addFavorite(idmovie, user.uid, type);
+
     } else {
       deleteFavorite(idmovie, user.uid, type);
     }
   }
 
+
   const addFavorite = async (idmovie, iduser, type) => {
     let favorite = { 'idmovie': idmovie, 'iduser': iduser, 'type': type };
+
     const productsP = firebaseServiceFavorites.addDocument(dbCollections.Favorites, favorite)
       .then(id => {
         setFavorite(true);
@@ -195,7 +201,9 @@ export const DetailMovie = () => {
   }
 
   const getFavorite = async () => {
+
     const favoritesPromise = firebaseServiceFavorites.getDocumentById(dbCollections.Favorites, user.uid, idmovie, type)
+
       .then(res => {
         setFavorite(res);
       })
@@ -331,6 +339,7 @@ export const DetailMovie = () => {
               <button className="btn btn-success mx-2">
                 Descargar poster
               </button>
+
               {type === 'movie' && (
                 <button className="btn btn-success " type="button" onClick={getMovieTrailer}
                   data-bs-toggle="modal"
@@ -338,6 +347,7 @@ export const DetailMovie = () => {
                   Ver trailer
                 </button>)
               }
+
             </div>
           </div>
         </div>
@@ -358,6 +368,8 @@ export const DetailMovie = () => {
 
           </div>
         </div>
+
+
       </div>
       {/* <div  className="modal fade"
         id="trailer"
