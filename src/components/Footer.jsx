@@ -107,7 +107,12 @@ export let Footer = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">ejemplo</div>
+            <div className="modal-body d-flex  flex-column mx-auto">
+              <a href="https://drive.google.com/file/d/17PrzK51GyBppN0Ag5QguYjsRmJaIz4Jc/view?usp=sharing" target="_blanc" className="link-offset-2 link-underline link-underline-opacity-0 text-black ">Youmovie</a>
+              <a href="https://github.com/Nicolas-Fabian-Sanchez/23644-grupo8-YouMovie" target="_blanc" className="link-offset-2 link-underline link-underline-opacity-0 text-black ">Repositorio Github</a>
+              <a href="https://www.figma.com/file/6QabphpRCjHyqRyJLcqCXF/proyecto-integral?type=design&node-id=0%3A1&mode=design&t=D4i2plF8dQd2rKL9-1" target="_blanc" className="link-offset-2 link-underline link-underline-opacity-0 text-black ">Maquetado</a>
+              <a href="https://www.figma.com/file/6QabphpRCjHyqRyJLcqCXF/proyecto-integral?type=design&node-id=22-150&mode=design&t=0dQ0KZWTvPcm4qTC-0" target="_blanc" className="link-offset-2 link-underline link-underline-opacity-0 text-black ">funcionabilidad</a>
+            </div>
           </div>
         </div>
       </div>
