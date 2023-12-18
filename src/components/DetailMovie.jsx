@@ -339,15 +339,13 @@ export const DetailMovie = () => {
               <button className="btn btn-success mx-2">
                 Descargar poster
               </button>
-
-              
+              {stateURL!=null && stateURL !=''  && (
                 <button className="btn btn-success " type="button" onClick={getMovieTrailer}
                   data-bs-toggle="modal"
                   data-bs-target="#trailer">
                   Ver trailer
-                </button>
-              
-
+                </button>)
+              }
             </div>
           </div>
         </div>
