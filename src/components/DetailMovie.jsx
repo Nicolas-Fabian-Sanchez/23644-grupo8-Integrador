@@ -340,13 +340,13 @@ export const DetailMovie = () => {
                 Descargar poster
               </button>
 
-              {type === 'movie' && (
+              
                 <button className="btn btn-success " type="button" onClick={getMovieTrailer}
                   data-bs-toggle="modal"
                   data-bs-target="#trailer">
                   Ver trailer
-                </button>)
-              }
+                </button>
+              
 
             </div>
           </div>
